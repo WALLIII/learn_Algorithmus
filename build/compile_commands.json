@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/Users/xyx/Documents/workspace/clearning/yx_workspace/build",
+  "command": "/usr/bin/clang++   -isystem /usr/local/Cellar/opencv/4.2.0_1/include/opencv4  -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++11 -o CMakeFiles/opencv_test.dir/src/opencv_test.cpp.o -c /Users/xyx/Documents/workspace/clearning/yx_workspace/src/opencv_test.cpp",
+  "file": "/Users/xyx/Documents/workspace/clearning/yx_workspace/src/opencv_test.cpp"
+}
+]

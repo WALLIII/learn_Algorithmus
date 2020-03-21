@@ -1,0 +1,3 @@
+/Users/xyx/Documents/workspace/clearning/yx_workspace/build/CMakeFiles/rebuild_cache.dir
+/Users/xyx/Documents/workspace/clearning/yx_workspace/build/CMakeFiles/edit_cache.dir
+/Users/xyx/Documents/workspace/clearning/yx_workspace/build/CMakeFiles/opencv_test.dir
