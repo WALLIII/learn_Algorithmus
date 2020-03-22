@@ -57,6 +57,56 @@ void reOrderArray(std::vector<int> &array)
     }
 }
 
+// void inlineSort(std::vector<int> &array)
+// {
+//     if (array.size() == 0)
+//         return;
+//     for (int i = 1; i < array.size(); ++i)
+//     {
+//         if(array[i]<array[i-1]){
+//             int tmp=array[i];
+//             int j=i;
+//             while(j>0 &&tmp<array[j-1]){
+//                 array[j]=array[j-1];
+//                 --j;
+//             }
+//             array[j]=tmp;
+//         }
+        
+//     }
+// }
+void print(const std::vector<int> &array)
+{
+    if (array.size() == 0)
+        return;
+    for (auto v : array)
+        std::cout << v << "   ";
+    std::cout << std::endl;
+}
+
+void inlineSort(std::vector<int> &array)
+{
+    if (array.size() == 0)
+        return;
+    for (int i = 0; i < array.size(); ++i)
+    {
+        if (array[i] < array[i - 1])
+        {
+            int tmp = array[i];
+            int j = i - 1;
+            while (j >= 0 && tmp < array[j])
+            {
+                array[j + 1] = array[j];
+                --j;
+                std::cout<<"inside while "<<std::endl;
+                print(array);
+            }
+            std::cout<<"outside while "<<std::endl;
+            array[j + 1] = tmp;
+            print(array);
+        }
+    }
+}
 int main()
 {
     std::vector<int> vec1 = {1,2,3,4,5};
@@ -76,6 +126,5 @@ int main()
         std::cout << v2 << "   ";
     }
     std::cout << std::endl;
-    // std::cout<<(1%2)<<"   "<<(5%2)<<"   ";
     return 0;
 }
