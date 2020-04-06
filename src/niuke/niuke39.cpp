@@ -26,7 +26,7 @@ bool check(std::vector<int> arr, int result)
             count++;
         }
     }
-    if (count >=   len / 2 + 1)
+    if (count >= len / 2 + 1)
         return true;
     else
         return false;
@@ -67,7 +67,7 @@ int MoreThanHalfNum_Solution(std::vector<int> numbers)
 
 int main()
 {
-    std::vector<int> arr = {1,2,3,2,2,2,5,4,2};
+    std::vector<int> arr = {1, 2, 3, 2, 2, 2, 5, 4, 2};
     int res = MoreThanHalfNum_Solution(arr);
     std::cout << "Result:  " << res << std::endl;
     // std::cout<<(9>>1)<<std::endl;
