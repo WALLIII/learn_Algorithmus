@@ -47,60 +47,49 @@ void DestroyTree(TreeNode *pRoot)
         DestroyTree(pRight);
     }
 }
-// void preorderTraversal(TreeNode *root, std::vector<int> &preOrder)
+
+// void postorderTraversal(TreeNode *root, std::vector<int> &PostOrder)
 // {
 //     if (!root)
 //         return;
-//     preOrder.push_back(root->val);
-//     preorderTraversal(root->left, preOrder);
-//     preorderTraversal(root->right, preOrder);
+//     postorderTraversal(root->left, PostOrder);
+//     postorderTraversal(root->right, PostOrder);
+//     PostOrder.push_back(root->val);
 // }
-// std::vector<int> preorderTraversal(TreeNode *root)
+// std::vector<int> postorderTraversal(TreeNode *root)
 // {
-//     std::vector<int> preOrder;
+//     std::vector<int> PostOrder;
 //     if (!root)
-//         return preOrder;
-//     preorderTraversal(root, preOrder);
-//     return preOrder;
+//         return PostOrder;
+//     postorderTraversal(root, PostOrder);
+//     return PostOrder;
 // }
-// std::vector<int> preorderTraversal(TreeNode *root)
-// {
-//     std::vector<int> ans;
-//     if (root == nullptr)
-//         return ans;
-//     std::stack<TreeNode *> st;
-//     st.push(root);
-//     while (!st.empty())
-//     {
-//         TreeNode *tmp = st.top();
-//         st.pop();
-//         ans.push_back(tmp->val);
-//         if (tmp->right)
-//             st.push(tmp->right);
-//         if (tmp->left)
-//             st.push(tmp->left);
-//     }
-//     return ans;
-// }
-std::vector<int> preorderTraversal(TreeNode *root)
-{
-    std::stack<TreeNode *> nodes;
-    std::vector<int> res;
-    TreeNode* curr=root;
-    while (curr || !nodes.empty())
-    {
-        while (curr)
-        {
-            nodes.push(curr->right);
-            res.push_back(curr->val);
-            curr = curr->left;
-        }
-        curr = nodes.top();
-        nodes.pop();
-    }
-    return res;
-}
 
+std::vector<int> postorderTraversal(TreeNode *root)
+{
+    std::vector<int> v;
+    if(root==nullptr)
+        return v;
+    std::stack<TreeNode*> s;
+    TreeNode *cur=root;
+    TreeNode *pre=nullptr; 
+    while(cur || !s.empty()){
+        while(cur){
+            s.push(cur);
+            cur=cur->left;
+        }
+        cur=s.top();
+        if(cur->right==nullptr || cur->right==pre){
+            v.push_back(cur->val);
+            s.pop();
+            pre=cur;
+            cur=nullptr;
+        }
+        else
+            cur=cur->right;
+    }
+    return v;
+}
 int main()
 {
     TreeNode *pNa = CreateBinaryTreeNode(8);
@@ -116,7 +105,7 @@ int main()
     ConnectTreeNodes(pNc, pNf, pNg);
 
     std::vector<int> preOrder;
-    preOrder = preorderTraversal(pNa);
+    preOrder = postorderTraversal(pNa);
     for (auto a : preOrder)
         std::cout << a << "   ";
     std::cout << std::endl;
