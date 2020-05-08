@@ -57,7 +57,6 @@ void AddToTail(ListNode **pHead, int value)
     }
 }
 
-
 void PrintListNode(ListNode *pNode)
 {
     if (pNode == nullptr)
@@ -83,6 +82,7 @@ void PrintList(ListNode *pHead)
 
     printf("\nPrintList ends.\n");
 }
+
 ListNode *CreateList(std::vector<int> nums)
 {
     if (nums.size() <= 0)
@@ -97,6 +97,31 @@ ListNode *CreateList(std::vector<int> nums)
     }
     return pHead;
 }
+
+ListNode *detectCycle(ListNode *head)
+{
+    if(!head)
+        return nullptr;
+    ListNode* fast=head;
+    ListNode* slow=head;
+    while(fast&&fast->next!=nullptr){
+        fast=fast->next->next;
+        slow=slow->next;
+        if(slow==fast)
+            break;
+    }
+    if(fast==nullptr||fast->next==nullptr){
+        return nullptr;
+    }
+    fast=head;
+    while(fast!=slow){
+        fast=fast->next;
+        slow=slow->next;
+    }
+    return fast;
+}
+
+
 int main(int argc, char *argv[])
 {
     ListNode *pNode1 = CreateListNode(1);
@@ -104,15 +129,22 @@ int main(int argc, char *argv[])
     ListNode *pNode3 = CreateListNode(3);
     ListNode *pNode4 = CreateListNode(4);
     ListNode *pNode5 = CreateListNode(5);
+    ListNode *pNode6 = CreateListNode(6);
 
     ConnectListNodes(pNode1, pNode2);
     ConnectListNodes(pNode2, pNode3);
     ConnectListNodes(pNode3, pNode4);
     ConnectListNodes(pNode4, pNode5);
-    
-    PrintList(pNode1);
-    
-    printf("\n");
-    DestroyList(pNode1);
+    ConnectListNodes(pNode5, pNode6);
+    ConnectListNodes(pNode6, pNode3);
+    ListNode *ans = detectCycle(pNode1);    
+    if (ans)
+    {
+        std::cout << "there is a loop, node is: " << ans->val << std::endl;
+    }
+    else if (!ans)
+    {
+        std::cout << "there is no loop" << std::endl;
+    }
     return 0;
 }

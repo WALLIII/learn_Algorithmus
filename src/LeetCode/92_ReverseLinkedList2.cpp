@@ -57,7 +57,6 @@ void AddToTail(ListNode **pHead, int value)
     }
 }
 
-
 void PrintListNode(ListNode *pNode)
 {
     if (pNode == nullptr)
@@ -83,6 +82,7 @@ void PrintList(ListNode *pHead)
 
     printf("\nPrintList ends.\n");
 }
+
 ListNode *CreateList(std::vector<int> nums)
 {
     if (nums.size() <= 0)
@@ -97,22 +97,52 @@ ListNode *CreateList(std::vector<int> nums)
     }
     return pHead;
 }
+
+ListNode *reverseBetween(ListNode *head, int m, int n)
+{
+    if (!head || m < 1 || n < 1 || m > n)
+    {
+        return nullptr;
+    }
+    if(m==n)
+        return head;
+
+    auto *dummy = new ListNode(-1);
+    dummy->next = head;
+    ListNode *pPre = dummy;
+    ListNode *q = dummy;
+   
+    for (int i = 0; i < m - 1; ++i)
+    {
+        pPre = pPre->next;
+    }
+    for (int i = 0; i < n; ++i)
+    {
+        q = q->next;
+    }
+    ListNode *p = pPre->next;
+    ListNode *qNext = q->next;
+
+    auto pre = p, curr = pre->next;
+   
+    while(curr!=qNext) {
+        auto tmp = curr->next;
+        curr->next = pre;
+        pre = curr;
+        curr = tmp;
+    }
+    pPre->next = q;
+    p->next = qNext;
+    return dummy->next;
+    
+}
+
 int main(int argc, char *argv[])
 {
-    ListNode *pNode1 = CreateListNode(1);
-    ListNode *pNode2 = CreateListNode(2);
-    ListNode *pNode3 = CreateListNode(3);
-    ListNode *pNode4 = CreateListNode(4);
-    ListNode *pNode5 = CreateListNode(5);
+    std::vector<int> nums = {1};
+    ListNode *head = CreateList(nums);
 
-    ConnectListNodes(pNode1, pNode2);
-    ConnectListNodes(pNode2, pNode3);
-    ConnectListNodes(pNode3, pNode4);
-    ConnectListNodes(pNode4, pNode5);
-    
-    PrintList(pNode1);
-    
-    printf("\n");
-    DestroyList(pNode1);
+    ListNode *newH = reverseBetween(head, 1, 1);
+    PrintList(newH);
     return 0;
 }

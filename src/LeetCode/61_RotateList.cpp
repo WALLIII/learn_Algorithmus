@@ -57,7 +57,6 @@ void AddToTail(ListNode **pHead, int value)
     }
 }
 
-
 void PrintListNode(ListNode *pNode)
 {
     if (pNode == nullptr)
@@ -83,6 +82,7 @@ void PrintList(ListNode *pHead)
 
     printf("\nPrintList ends.\n");
 }
+
 ListNode *CreateList(std::vector<int> nums)
 {
     if (nums.size() <= 0)
@@ -97,22 +97,64 @@ ListNode *CreateList(std::vector<int> nums)
     }
     return pHead;
 }
+
+ListNode *rotateRight(ListNode *head, int k)
+{
+    if(head==nullptr)
+        return nullptr;
+    ListNode* p1=head;
+    ListNode* p2=head;
+    int n=0;
+    for(auto p=head;p;p=p->next) n++;
+    k=k%n;
+    while(k--){
+        p1=p1->next;
+    }
+    while(p1->next){
+        p2=p2->next;
+        p1=p1->next;
+    }
+    // ListNode* pNewHead = new ListNode(0);
+    p1->next=head;
+    head=p2->next;
+    p2->next=nullptr;
+    return head;
+}
+// ListNode *rotateRight(ListNode *head, int k)
+// {
+//     if (!head)
+//         return NULL;
+//     int n = 0;
+//     for (auto p = head; p; p = p->next)
+//         n++;
+//     k %= n;
+//     std::cout << "k:  " << k << " n: " << n << std::endl;
+//     auto first = head, second = head;
+//     while (k--)
+//     {
+//         first = first->next;
+//     }
+//     while (first->next)
+//     {
+//         first = first->next;
+//         second = second->next;
+//     }
+//     first->next = head;
+//     head = second->next;
+//     second->next = NULL;
+//     return head;
+// }
 int main(int argc, char *argv[])
 {
-    ListNode *pNode1 = CreateListNode(1);
-    ListNode *pNode2 = CreateListNode(2);
-    ListNode *pNode3 = CreateListNode(3);
-    ListNode *pNode4 = CreateListNode(4);
-    ListNode *pNode5 = CreateListNode(5);
+    std::vector<int> nums1 = {1};
 
-    ConnectListNodes(pNode1, pNode2);
-    ConnectListNodes(pNode2, pNode3);
-    ConnectListNodes(pNode3, pNode4);
-    ConnectListNodes(pNode4, pNode5);
-    
-    PrintList(pNode1);
-    
+    ListNode *pHead1 = CreateList(nums1);
+    std::cout << "List 1:   ";
+    PrintList(pHead1);
+    ListNode *res = rotateRight(pHead1, 1);
+    PrintList(res);
     printf("\n");
-    DestroyList(pNode1);
+    DestroyList(pHead1);
+
     return 0;
 }

@@ -57,7 +57,6 @@ void AddToTail(ListNode **pHead, int value)
     }
 }
 
-
 void PrintListNode(ListNode *pNode)
 {
     if (pNode == nullptr)
@@ -83,6 +82,7 @@ void PrintList(ListNode *pHead)
 
     printf("\nPrintList ends.\n");
 }
+
 ListNode *CreateList(std::vector<int> nums)
 {
     if (nums.size() <= 0)
@@ -97,22 +97,21 @@ ListNode *CreateList(std::vector<int> nums)
     }
     return pHead;
 }
+void deleteNode(ListNode *node)
+{
+    node->val=node->next->val;
+    node->next=node->next->next;
+}
+
 int main(int argc, char *argv[])
 {
-    ListNode *pNode1 = CreateListNode(1);
-    ListNode *pNode2 = CreateListNode(2);
-    ListNode *pNode3 = CreateListNode(3);
-    ListNode *pNode4 = CreateListNode(4);
-    ListNode *pNode5 = CreateListNode(5);
+    std::vector<int> nums1 = {1};
 
-    ConnectListNodes(pNode1, pNode2);
-    ConnectListNodes(pNode2, pNode3);
-    ConnectListNodes(pNode3, pNode4);
-    ConnectListNodes(pNode4, pNode5);
-    
-    PrintList(pNode1);
-    
+    ListNode *pHead1 = CreateList(nums1);
+    deleteNode(pHead1);
+    PrintList(pHead1);
     printf("\n");
-    DestroyList(pNode1);
+    DestroyList(pHead1);
+
     return 0;
 }

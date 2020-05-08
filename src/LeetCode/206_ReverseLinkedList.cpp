@@ -57,7 +57,6 @@ void AddToTail(ListNode **pHead, int value)
     }
 }
 
-
 void PrintListNode(ListNode *pNode)
 {
     if (pNode == nullptr)
@@ -83,6 +82,7 @@ void PrintList(ListNode *pHead)
 
     printf("\nPrintList ends.\n");
 }
+
 ListNode *CreateList(std::vector<int> nums)
 {
     if (nums.size() <= 0)
@@ -97,21 +97,56 @@ ListNode *CreateList(std::vector<int> nums)
     }
     return pHead;
 }
+
+ListNode *reverseList(ListNode *head)
+{
+    if (head == nullptr)
+        return nullptr;
+    ListNode *nextNode = nullptr;
+    ListNode *currNode = head;
+    ListNode *preNode = nullptr;
+    while (currNode)
+    {
+        nextNode = currNode->next;
+        currNode->next = preNode;
+        preNode = currNode;
+        if (nextNode)
+            currNode = nextNode;
+        else
+            return currNode;
+    }
+    return nullptr;
+}
+
+// ListNode *reverseList(ListNode *head)
+// {
+    // if (!head || !head->next)
+    //     return head;
+
+    // ListNode *t = reverseList(head->next);
+    // head->next->next = head;
+    // head->next = NULL;
+
+    // return t;
+// }
+
 int main(int argc, char *argv[])
 {
-    ListNode *pNode1 = CreateListNode(1);
-    ListNode *pNode2 = CreateListNode(2);
-    ListNode *pNode3 = CreateListNode(3);
-    ListNode *pNode4 = CreateListNode(4);
-    ListNode *pNode5 = CreateListNode(5);
+    // ListNode *pNode1 = CreateListNode(1);
+    // ListNode *pNode2 = CreateListNode(2);
+    // ListNode *pNode3 = CreateListNode(3);
+    // ListNode *pNode4 = CreateListNode(4);
+    // ListNode *pNode5 = CreateListNode(5);
 
-    ConnectListNodes(pNode1, pNode2);
-    ConnectListNodes(pNode2, pNode3);
-    ConnectListNodes(pNode3, pNode4);
-    ConnectListNodes(pNode4, pNode5);
-    
+    // ConnectListNodes(pNode1, pNode2);
+    // ConnectListNodes(pNode2, pNode3);
+    // ConnectListNodes(pNode3, pNode4);
+    // ConnectListNodes(pNode4, pNode5);
+    std::vector<int> nums = {0, 1, 2, 3, 4};
+    ListNode *pNode1 = CreateList(nums);
     PrintList(pNode1);
-    
+    ListNode *newHead = reverseList(pNode1);
+    PrintList(newHead);
     printf("\n");
     DestroyList(pNode1);
     return 0;

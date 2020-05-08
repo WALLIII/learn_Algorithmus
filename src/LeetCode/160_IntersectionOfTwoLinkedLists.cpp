@@ -57,7 +57,6 @@ void AddToTail(ListNode **pHead, int value)
     }
 }
 
-
 void PrintListNode(ListNode *pNode)
 {
     if (pNode == nullptr)
@@ -83,6 +82,7 @@ void PrintList(ListNode *pHead)
 
     printf("\nPrintList ends.\n");
 }
+
 ListNode *CreateList(std::vector<int> nums)
 {
     if (nums.size() <= 0)
@@ -97,22 +97,72 @@ ListNode *CreateList(std::vector<int> nums)
     }
     return pHead;
 }
+
+ListNode *getIntersectionNode(ListNode *headA, ListNode *headB)
+{
+    if (!headA || !headB)
+        return nullptr;
+    int leA = 0, leB = 0;
+    ListNode *pA = headA;
+    ListNode *pB = headB;
+    for (pA = headA; pA; pA = pA->next)
+        ++leA;
+    for (pB = headB; pB; pB = pB->next)
+        ++leB;
+    if (leA > leB)
+    {
+        while (leA - leB)
+        {
+            headA = headA->next;
+            leA--;
+        }
+    }
+    else if (leA < leB)
+    {
+        while (leB - leA)
+        {
+            headB = headB->next;
+            leB--;
+        }
+    }
+    pA = headA;
+    pB = headB;
+    while (pA)
+    {
+        if (pA == pB)
+            return pA;
+        pA = pA->next;
+        pB = pB->next;
+    }
+    return nullptr;
+}
 int main(int argc, char *argv[])
 {
-    ListNode *pNode1 = CreateListNode(1);
-    ListNode *pNode2 = CreateListNode(2);
-    ListNode *pNode3 = CreateListNode(3);
+    ListNode *pNode1 = CreateListNode(4);
+    ListNode *pNode2 = CreateListNode(1);
+
+    ListNode *pNode3 = CreateListNode(8);
     ListNode *pNode4 = CreateListNode(4);
     ListNode *pNode5 = CreateListNode(5);
 
+    ListNode *pNode6 = CreateListNode(5);
+    ListNode *pNode7 = CreateListNode(0);
+    ListNode *pNode8 = CreateListNode(1);
     ConnectListNodes(pNode1, pNode2);
     ConnectListNodes(pNode2, pNode3);
     ConnectListNodes(pNode3, pNode4);
     ConnectListNodes(pNode4, pNode5);
-    
-    PrintList(pNode1);
-    
-    printf("\n");
-    DestroyList(pNode1);
+
+    ConnectListNodes(pNode6, pNode7);
+    ConnectListNodes(pNode7, pNode8);
+    ConnectListNodes(pNode8, pNode5);
+
+
+    ListNode *commen = getIntersectionNode(pNode1, pNode6);
+    if (commen)
+        std::cout << commen->val << std::endl;
+    else
+        std::cout<<"not finded"<<std::endl;
+
     return 0;
 }

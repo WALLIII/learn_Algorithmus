@@ -57,7 +57,6 @@ void AddToTail(ListNode **pHead, int value)
     }
 }
 
-
 void PrintListNode(ListNode *pNode)
 {
     if (pNode == nullptr)
@@ -83,6 +82,7 @@ void PrintList(ListNode *pHead)
 
     printf("\nPrintList ends.\n");
 }
+
 ListNode *CreateList(std::vector<int> nums)
 {
     if (nums.size() <= 0)
@@ -97,22 +97,55 @@ ListNode *CreateList(std::vector<int> nums)
     }
     return pHead;
 }
+
+ListNode *mergeTwoLists(ListNode *l1, ListNode *l2)
+{
+    if (l1 == nullptr)
+        return l2;
+    if (l2 == nullptr)
+        return l1;
+    if (l1 == nullptr && l2 == nullptr)
+        return nullptr;
+    ListNode *dummyHead = new ListNode(0);
+    ListNode *currNode = dummyHead;
+    while (l1 != nullptr && l2 != nullptr)
+    {
+        if (l1->val <= l2->val)
+        {
+            currNode->next = l1;
+            currNode = currNode->next;
+            l1 = l1->next;
+        }
+        else if (l1->val > l2->val)
+        {
+            currNode->next = l2;
+            currNode = currNode->next;
+            l2 = l2->next;
+        }
+    }
+    currNode->next = (l1 == nullptr) ? l2 : l1;
+    return dummyHead->next;
+    // ListNode *ans = dummyHead->next;
+    // delete dummyHead;
+    // return ans;
+}
+
 int main(int argc, char *argv[])
 {
-    ListNode *pNode1 = CreateListNode(1);
-    ListNode *pNode2 = CreateListNode(2);
-    ListNode *pNode3 = CreateListNode(3);
-    ListNode *pNode4 = CreateListNode(4);
-    ListNode *pNode5 = CreateListNode(5);
+    std::vector<int> nums1 = {1, 2, 4};
+    std::vector<int> nums2 = {1, 3, 4, 8};
+    ListNode *pHead1 = CreateList(nums1);
+    ListNode *pHead2 = CreateList(nums2);
+    std::cout << "List 1:   ";
+    PrintList(pHead1);
+    std::cout << "List 2:   ";
+    PrintList(pHead2);
 
-    ConnectListNodes(pNode1, pNode2);
-    ConnectListNodes(pNode2, pNode3);
-    ConnectListNodes(pNode3, pNode4);
-    ConnectListNodes(pNode4, pNode5);
-    
-    PrintList(pNode1);
-    
+    ListNode *newHead = mergeTwoLists(pHead1, pHead2);
+    std::cout << "New List:   ";
+    PrintList(newHead);
     printf("\n");
-    DestroyList(pNode1);
+    // DestroyList(pHead1);
+    // DestroyList(pHead2);
     return 0;
 }
