@@ -1,9 +1,9 @@
 # learn_Algorithmus
 
-##src/Niuke ---> solution of Niuke.com
+## src/Niuke ---> solution of Niuke.com
 
-##src/Leetcode ---> solution of leetcode.com
+## src/Leetcode ---> solution of leetcode.com
 
-##cd buil
+## cd buil
    make
    ../bin/opencv_test
