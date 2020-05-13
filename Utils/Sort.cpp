@@ -26,25 +26,28 @@ void quickSort(std::vector<int> &arr)
 }
 void quickSortPart(std::vector<int> &arr, int first, int last)
 {
-    if(first>=last){
+    if (first >= last)
+    {
         return;
     }
-    int midIndex=Partition(arr, first, last);
-    quickSortPart(arr, first, midIndex-1);
-    quickSortPart(arr, midIndex+1, last);
+    int midIndex = Partition(arr, first, last);
+    quickSortPart(arr, first, midIndex - 1);
+    quickSortPart(arr, midIndex + 1, last);
 }
 
-int Partition(std::vector<int> &arr, int first, int last){
-    int tmp=arr[last];
-    while(first<last){
-        while(first<last && arr[first]<=tmp)
+int Partition(std::vector<int> &arr, int first, int last)
+{
+    int tmp = arr[last];
+    while (first < last)
+    {
+        while (first < last && arr[first] <= tmp)
             first++;
         std::swap(arr[first], arr[last]);
-        while(first<last && arr[last]>=tmp)
+        while (first < last && arr[last] >= tmp)
             last--;
         std::swap(arr[first], arr[last]);
     }
-    return first;
+    return last;
 }
 
 int main()

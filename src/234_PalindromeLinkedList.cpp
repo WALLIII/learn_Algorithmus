@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
@@ -99,41 +100,39 @@ ListNode *CreateList(std::vector<int> nums)
 
 bool isPalindrome(ListNode *head)
 {
-    if (!head || !head->next)
+    if(!head||!head->next)
         return true;
-    ListNode *pmid = head, *head2 = head;
-    while (head2 && head2->next)
-    {
-        pmid = pmid->next;
-        head2 = head2->next->next;
+    ListNode* pmid=head, *head2=head;
+    while(head2&&head2->next){
+        pmid=pmid->next;
+        head2=head2->next->next;
+
     }
-
+  
     // 现在开始反转p2～pmid之间的链表
-    ListNode *curr = pmid, *pnext = pmid->next;
-
-    while (pnext)
-    {
-        ListNode *tmp = pnext->next;
-        pnext->next = curr;
-        curr = pnext;
-        pnext = tmp;
+    ListNode* curr=pmid, *pnext=pmid->next;
+    
+    while(pnext){
+        ListNode* tmp=pnext->next;
+        pnext->next=curr;
+        curr=pnext;
+        pnext=tmp;
     }
     // pmid->next=NULL;
-    pmid->next = nullptr;
+    pmid->next=nullptr;
 
-    ListNode *p1 = head;
+    ListNode* p1=head;
 
-    while (p1 && curr)
-    {
-        if (p1->val == curr->val)
-        {
-            p1 = p1->next;
-            curr = curr->next;
+    while(p1&&curr){
+        if(p1->val==curr->val){
+            p1=p1->next;
+            curr=curr->next;
         }
         else
             return false;
     }
     return true;
+
 }
 // bool isPalindrome(ListNode *head)
 // {

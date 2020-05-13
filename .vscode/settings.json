@@ -77,7 +77,8 @@
         "memory_resource": "cpp",
         "cinttypes": "cpp",
         "stack": "cpp",
-        "__functional_03": "cpp"
+        "__functional_03": "cpp",
+        "unordered_set": "cpp"
     },
     "C_Cpp.default.configurationProvider": "vector-of-bool.cmake-tools",
     "C_Cpp.errorSquiggles": "Disabled"

@@ -56,20 +56,20 @@ void DestroyTree(TreeNode *pRoot)
 
 
 
-int main()
-{
-    TreeNode *pNa = CreateBinaryTreeNode(8);
-    TreeNode *pNb = CreateBinaryTreeNode(6);
-    TreeNode *pNc = CreateBinaryTreeNode(10);
-    TreeNode *pNd = CreateBinaryTreeNode(5);
-    TreeNode *pNe = CreateBinaryTreeNode(7);
-    TreeNode *pNf = CreateBinaryTreeNode(9);
-    TreeNode *pNg = CreateBinaryTreeNode(11);
+// int main()
+// {
+    // TreeNode *pN1 = CreateBinaryTreeNode(8);
+    // TreeNode *pN2 = CreateBinaryTreeNode(6);
+    // TreeNode *pN3 = CreateBinaryTreeNode(10);
+    // TreeNode *pN4 = CreateBinaryTreeNode(5);
+    // TreeNode *pN5 = CreateBinaryTreeNode(7);
+    // TreeNode *pN6 = CreateBinaryTreeNode(9);
+    // TreeNode *pN7 = CreateBinaryTreeNode(11);
 
-    ConnectTreeNodes(pNa, pNb, pNc);
-    ConnectTreeNodes(pNb, pNd, pNe);
-    ConnectTreeNodes(pNc, pNf, pNg);
+    // ConnectTreeNodes(pN1, pN2, pN3);
+    // ConnectTreeNodes(pN2, pN4, pN5);
+    // ConnectTreeNodes(pNc, pNf, pNg);
 
-    DestroyTree(pNa);
-    return 0;
-}
+//     DestroyTree(pNa);
+//     return 0;
+// }
