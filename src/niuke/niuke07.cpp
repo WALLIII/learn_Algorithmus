@@ -58,7 +58,7 @@ TreeNode *reConstructBinaryTree(std::vector<int> pre, std::vector<int> vin)
     }
     std::cout<<std::endl;
     root->left=reConstructBinaryTree(pre_left, in_left);
-    root->right=reConstructBinaryTree(pre_right, in_right);
+    root->right= (pre_right, in_right);
     return root;
 }
 

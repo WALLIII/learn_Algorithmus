@@ -1,139 +1,71 @@
-#include <vector>
-#include <iostream>
-#include <stack>
-#include <queue>
+#include "../Utils/TreeTemplate.cpp"
 
-struct TreeNode
-{
-    int val;
-    struct TreeNode *left;
-    struct TreeNode *right;
-    struct TreeNode *next;
-    TreeNode(int x) : val(x), left(NULL), right(NULL), next(NULL)
-    {
-    }
-};
+// bool VerifySquenceOfBST(std::vector<int> sequence)
+// {
+//     if(sequence.empty())
+//         return false;
+//     int size=sequence.size();
+//     std::vector<int> LeftTree;
+//     std::vector<int> RightTree;
+//     int i=0;
+//     for(i=0;i<size-1;++i){
+//         if(sequence[i]<sequence[size-1])
+//             LeftTree.push_back(sequence[i]);
+//         else
+//             break;
+//     }
+//     for(int j=i;j<size-1;++j){
+//         if(sequence[j]>sequence[size-1])
+//             RightTree.push_back(sequence[j]);
+//         else
+//             return false;
+//     }
+//     bool left=true;
+//     if(!LeftTree.empty())
+//         left=VerifySquenceOfBST(LeftTree);
+//     bool right=true;
+//     if(!RightTree.empty())
+//         right=VerifySquenceOfBST(RightTree);
+//     return (left&&right);
+// }
 
-TreeNode *CreateBinaryTreeNode(int value)
-{
-    TreeNode *pNode = new TreeNode(value);
-    pNode->val = value;
-    pNode->left = nullptr;
-    pNode->right = nullptr;
-    pNode->next = nullptr;
-
-    return pNode;
-}
-
-void ConnectTreeNodes(TreeNode *pParent, TreeNode *pLeft, TreeNode *pRight)
-{
-    if (pParent != nullptr)
-    {
-        pParent->left = pLeft;
-        pParent->right = pRight;
-
-        if (pLeft != nullptr)
-            pLeft->next = pParent;
-        if (pRight != nullptr)
-            pRight->next = pParent;
-    }
-}
-
-void DestroyTree(TreeNode *pRoot)
-{
-    if (pRoot != nullptr)
-    {
-        TreeNode *pLeft = pRoot->left;
-        TreeNode *pRight = pRoot->right;
-
-        delete pRoot;
-        pRoot = nullptr;
-
-        DestroyTree(pLeft);
-        DestroyTree(pRight);
-    }
-}
-
-// recursively
-bool VerifySquenceOfBST(std::vector<int> sequence)
-{
-    if (sequence.size() <= 0)
-    {
+bool VerifySquenceOfBST(std::vector<int> sequence){
+    int size=sequence.size()-1;
+    if(size<=-1)
         return false;
-    }
-    int length = sequence.size();
-    std::vector<int> leftTree;
-    std::vector<int> rightTree;
-    int i = 0;
-    for (i = 0; i < length - 1; ++i)
-    {
-        if (sequence[i] < sequence[length - 1])
-        {
-            leftTree.push_back(sequence[i]);
-        }
-        else
-            break;
-    }
-    int j = i;
-    for (j = i; j < length - 1; ++j)
-    {
-        if (sequence[j] > sequence[length - 1])
-        {
-            rightTree.push_back(sequence[j]);
-        }
-        else
+    int i=0;
+    while(size){
+        while(sequence[i]<sequence[size])
+            ++i;
+        while(sequence[i]>sequence[size])
+            ++i;
+        if(i<size)
             return false;
-    }
-    bool left = true;
-    bool right = true;
-    if (!leftTree.empty())
-        left = VerifySquenceOfBST(leftTree);
-    if (!rightTree.empty())
-    {
-        right = VerifySquenceOfBST(rightTree);
-    }
-    return left && right;
-}
-
-// non recursively
-bool VerifySquenceOfBST2(std::vector<int> sequence)
-{
-    int size = sequence.size();
-    if (0 == size)
-        return false;
-
-    int i = 0;
-    while (--size)
-    {
-        while (sequence[i++] < sequence[size])
-            ;
-        while (sequence[i++] > sequence[size])
-            ;
-
-        if (i < size)
-            return false;
-        i = 0;
+        i=0;
+        --size;
     }
     return true;
 }
-
 int main()
 {
-    TreeNode *pNa = CreateBinaryTreeNode(8);
-    TreeNode *pNb = CreateBinaryTreeNode(8);
-    TreeNode *pNc = CreateBinaryTreeNode(7);
-    TreeNode *pNd = CreateBinaryTreeNode(9);
-    TreeNode *pNe = CreateBinaryTreeNode(2);
-    TreeNode *pNf = CreateBinaryTreeNode(4);
-    TreeNode *pNg = CreateBinaryTreeNode(7);
+    TreeNode *pN1 = CreateBinaryTreeNode(8);
+    TreeNode *pN2 = CreateBinaryTreeNode(6);
+    TreeNode *pN3 = CreateBinaryTreeNode(10);
+    TreeNode *pN4 = CreateBinaryTreeNode(5);
+    TreeNode *pN5 = CreateBinaryTreeNode(7);
+    TreeNode *pN6 = CreateBinaryTreeNode(9);
+    TreeNode *pN7 = CreateBinaryTreeNode(11);
 
-    ConnectTreeNodes(pNa, pNb, pNc);
-    ConnectTreeNodes(pNb, pNd, pNe);
-    ConnectTreeNodes(pNe, pNf, pNg);
-    std::vector<int> postOrderSerice = {7, 4, 6, 5};
-    bool result = VerifySquenceOfBST(postOrderSerice);
-    std::cout << "result: " << result << std::endl;
+    ConnectTreeNodes(pN1, pN2, pN3);
+    ConnectTreeNodes(pN2, pN4, pN5);
+    ConnectTreeNodes(pN3, pN6, pN7);
+    std::vector<int> postOrder = {5, 7, 6, 9, 11, 10, 8};
+    // std::vector<int> postOrder = {7,4,6,5};
+    if (VerifySquenceOfBST(postOrder))
+        std::cout << "true.." << std::endl;
+    else
+        std::cout << "false.." << std::endl;
 
-    DestroyTree(pNa);
+    DestroyTree(pN1);
     return 0;
 }

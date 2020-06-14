@@ -1,20 +1,21 @@
 #include "../Utils/TreeTemplate.cpp"
 
-int maxPathSum(TreeNode* root, int &maxVal){
-    if(root==nullptr)
+int maxPathSum(TreeNode *root, int &maxVal)
+{
+    if (root == nullptr)
         return 0;
-    int left=maxPathSum(root->left, maxVal);
-    int right=maxPathSum(root->right, maxVal);
-    int candidateMax=root->val+std::max(0,left)+std::max(0,right);
-    int subTreeMax=root->val+std::max(0, std::max(left, right));
-    maxVal=maxVal>candidateMax?maxVal:candidateMax;
+    int left = maxPathSum(root->left, maxVal);
+    int right = maxPathSum(root->right, maxVal);
+    int candidateMax = root->val + std::max(0, left) + std::max(0, right);
+    int subTreeMax = root->val + std::max(0, std::max(left, right));
+    maxVal = maxVal > candidateMax ? maxVal : candidateMax;
     return subTreeMax;
 }
 
 int maxPathSum(TreeNode *root)
 {
-    int maxVal=INT_MIN;
-    int ret=maxPathSum(root, maxVal);
+    int maxVal = INT_MIN;
+    int ret = maxPathSum(root, maxVal);
     return maxVal;
 }
 int main()

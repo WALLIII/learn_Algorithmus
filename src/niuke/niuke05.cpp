@@ -1,54 +1,41 @@
 #include <string>
 #include <iostream>
-#include <cstring>
 
 void replaceSpace(char *str, int length)
 {
-    if (str == nullptr || length <= 0)
-    {
+    if (str == nullptr || length == 0)
         return;
-    }
-    int oldLength = 0, newLength = 0;
-    int numBlack = 0;
-    int i = 0;
+    int oldLength = 0, newLength = 0, i = 0;
     while (str[i] != '\0')
     {
+        oldLength++;
+        newLength++;
         if (str[i] == ' ')
-        {
-            ++numBlack;
-        }
-        ++oldLength;
+            newLength += 2;
         ++i;
     }
-    newLength = oldLength + 2 * numBlack;
-    std::cout << "newLength:" << newLength << std::endl;
-    std::cout << "oldLength:" << oldLength << std::endl;
-    std::cout << "numBlack:" << numBlack << std::endl;
+    std::cout << "old:  " << oldLength << "  new:  " << newLength << std::endl;
     if (newLength > length)
         return;
-    int indexOriginal = oldLength;
-    int indexNew = newLength;
-    while (indexOriginal >= 0 && indexNew > indexOriginal)
+    int p1 = oldLength, p2 = newLength;
+    while (p1 >= 0 && p2 > p1)
     {
-        if (str[indexOriginal] == ' ')
+        if (str[p1] != ' ')
         {
-            str[indexNew--] = '0';
-            str[indexNew--] = '2';
-            str[indexNew--] = '%';
+            str[p2--] = str[p1--];
         }
-        else
+        else if (str[p1] == ' ')
         {
-            str[indexNew--] = str[indexOriginal];
+            str[p2--] = '0';
+            str[p2--] = '2';
+            str[p2--] = '%';
         }
-        --indexOriginal;
     }
 }
 
 int main()
 {
-    char str[] = "";
-    int length = 100;
-    replaceSpace(str, length);
-    std::cout << str << std::endl;
-    return 0;
+    char str[100] = "we are happy.";
+    replaceSpace(str, 100);
+    std::cout << "res:  " << str << std::endl;
 }

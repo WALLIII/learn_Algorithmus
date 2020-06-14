@@ -1,7 +1,42 @@
-#include "utils/MyStack.h"
-#include <stack>
-#include <iostream>
+#include<iostream>
+#include<stack>
 
+
+class MyStack
+{
+public:
+    void push(int value);
+    void pop();
+    int top();
+    int min();
+
+private:
+    std::stack<int> sk;
+    std::stack<int> ass;
+};
+
+void MyStack::push(int value){
+    sk.push(value);
+    if(ass.empty()||value<=ass.top()){
+        ass.push(value);
+    }
+    else{
+        ass.push(ass.top());
+    }
+}
+
+void MyStack::pop(){
+    sk.pop();
+    ass.pop();
+}
+
+int MyStack::min(){
+    return ass.top();
+}
+
+int MyStack::top(){
+    return sk.top();
+}
 int main()
 {
     MyStack stack1;

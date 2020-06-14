@@ -4,6 +4,11 @@ void DFSFindPath(TreeNode *root, int rest, std::vector<std::vector<int>> &path, 
 {
     rest = rest - (root->val);
     res.push_back(root->val);
+    for (auto a : res)
+    {
+        std::cout << a << "  ";
+    }
+    std::cout << std::endl;
     if (root->left == nullptr && root->right == nullptr)
     {
         if (rest == 0)
@@ -34,6 +39,7 @@ std::vector<std::vector<int>> FindPath(TreeNode *root, int expectNumber)
     return path;
 }
 
+
 // vector<vector<int> > FindPath(TreeNode* root, int expectNumber) {
 //     stack<TreeNode*> s;
 //     vector<int> v;
@@ -59,19 +65,20 @@ std::vector<std::vector<int>> FindPath(TreeNode *root, int expectNumber)
 
 int main()
 {
-    TreeNode *pNa = CreateBinaryTreeNode(10);
-    TreeNode *pNb = CreateBinaryTreeNode(5);
-    TreeNode *pNc = CreateBinaryTreeNode(12);
-    TreeNode *pNd = CreateBinaryTreeNode(4);
-    TreeNode *pNe = CreateBinaryTreeNode(7);
-    // TreeNode *pNf = CreateBinaryTreeNode(9);
-    // TreeNode *pNg = CreateBinaryTreeNode(11);
+    TreeNode *pNa = CreateBinaryTreeNode(1);
+    TreeNode *pNb = CreateBinaryTreeNode(-2);
+    TreeNode *pNc = CreateBinaryTreeNode(-3);
+    TreeNode *pNd = CreateBinaryTreeNode(1);
+    TreeNode *pNe = CreateBinaryTreeNode(3);
+    TreeNode *pNf = CreateBinaryTreeNode(-2);
+    TreeNode *pNg = CreateBinaryTreeNode(-1);
 
     ConnectTreeNodes(pNa, pNb, pNc);
     ConnectTreeNodes(pNb, pNd, pNe);
-    // ConnectTreeNodes(pNc, pNf, pNg);
+    ConnectTreeNodes(pNc, pNf, nullptr);
+    ConnectTreeNodes(pNd, pNg, nullptr);
     std::vector<std::vector<int>> path;
-    path = FindPath(pNa, 22);
+    path = FindPath(pNa, -1);
     if (path.size() > 0)
     {
         for (auto res : path)

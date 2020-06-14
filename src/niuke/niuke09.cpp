@@ -1,23 +1,48 @@
 #include <stack>
-#include <iostream>
-
-void push(int node, std::stack<int> stack1, std::stack<int> stack2)
+#include<iostream>
+class myQueue
 {
-    stack1.push(node);
-}
+private:
+    std::stack<int> stack1;
+    std::stack<int> stack2;
 
-int pop(std::stack<int> stack1, std::stack<int> stack2)
-{
-    if (stack2.empty())
+public:
+    int pop()
     {
-        while (!stack1.empty())
+       int tmp=0;
+       if (!stack2.empty())
         {
-            int &tmp = stack1.top();
-            stack1.pop();
-            stack2.push(tmp);
+            tmp = stack2.top();
+            stack2.pop();
+            return tmp;
+        }
+        else
+        {
+            while (!stack1.empty())
+            {
+                int s1=stack1.top();
+                stack2.push(s1);
+                stack1.pop();
+            }
+            tmp = stack2.top();
+            stack2.pop();
+            return tmp;
         }
     }
-    int head = stack2.top();
-    stack2.pop();
-    return head;
+    void push(int node)
+    {
+        stack1.push(node);
+    }
+};
+
+int main()
+{
+    myQueue que;
+    que.push(1);
+    que.push(2);
+    que.push(3);
+    std::cout<<que.pop()<<std::endl;
+    std::cout<<que.pop()<<std::endl;
+    std::cout<<que.pop()<<std::endl;
+    return 0;
 }

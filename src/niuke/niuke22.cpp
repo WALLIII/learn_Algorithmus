@@ -88,7 +88,6 @@ ListNode *FindKthToTail(ListNode *pListHead, unsigned int k)
         else
             return nullptr;
     }
-    int count = 0;
     while (find1->next != nullptr)
     {
         find2 = find2->next;

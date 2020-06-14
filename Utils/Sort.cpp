@@ -50,6 +50,26 @@ int Partition(std::vector<int> &arr, int first, int last)
     return last;
 }
 
+void inlineSort(std::vector<int> &array)
+{
+    if (array.size() == 0)
+        return;
+    for (int i = 0; i < array.size(); ++i)
+    {
+        if (array[i] < array[i - 1])
+        {
+            int tmp = array[i];
+            int j = i - 1;
+            while (j >= 0 && tmp < array[j])
+            {
+                array[j + 1] = array[j];
+                --j;
+            }
+            array[j + 1] = tmp;
+        }
+    }
+}
+
 int main()
 {
     std::vector<int> arr = {8, 4, 7, 5, 1, 3};

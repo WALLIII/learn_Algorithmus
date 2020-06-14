@@ -1,61 +1,47 @@
-#include <vector>
-#include <stack>
 #include <iostream>
+#include <vector>
+#include<stack>
 
 // bool IsPopOrder(std::vector<int> pushV, std::vector<int> popV)
 // {
-//     int pushLength = pushV.size();
-//     int popLength = popV.size();
-//     if (pushLength == 0 || popLength == 0)
+//     int pushLen=pushV.size(), popLen=popV.size();
+//     if(pushLen==0 || popLen==0)
 //         return false;
-//     std::stack<int> s;
-//     s.push(pushV[0]);
-//     int pushIndex = 1;
-//     int popIndex = 0;
-//     while (!s.empty())
-//     {
-//         if (s.top() == popV[popIndex])
-//         {
-//             popIndex++;
-//             s.pop();
-//         }
-//         else if (s.top() != popV[popIndex] && pushIndex < pushLength)
-//         {
-//             s.push(pushV[pushIndex]);
+//     int pushIndex=1, popIndex=0;
+//     std::stack<int> sk;
+//     sk.push(pushV[0]);
+//     while(!sk.empty()){
+//         if(pushIndex<pushLen && sk.top()!=popV[popIndex]){
+//             sk.push(pushV[pushIndex]);
 //             pushIndex++;
 //         }
-//         else if (s.top() != popV[popIndex] && pushIndex == pushLength)
-//         {
-//             s.pop();
+//         else if(sk.top()==popV[popIndex]){
+//             sk.pop();
+//             popIndex++;
 //         }
-//         if (popIndex == popLength)
-//             return true;
+//         else if(sk.top()!=popV[popIndex]&&pushIndex==pushLen)
+//             return false;
 //     }
-//     return false;
+//     return true;
 // }
-
-bool IsPopOrder(std::vector<int> pushV, std::vector<int> popV)
-{
-
-    if (pushV.size() == 0)
-         return false;
-    std::vector<int> stack;
-    for (int i = 0, j = 0; i < pushV.size();)
-    {
-        stack.push_back(pushV[i++]);
-        while (j < popV.size() && stack.back() == popV[j])
-        {
-            stack.pop_back();
+bool IsPopOrder(std::vector<int> pushV, std::vector<int> popV){
+    int pushLen=pushV.size(), popLen=popV.size();
+    if(pushLen==0 || popLen==0)
+        return false;
+    std::stack<int> sk;
+    for(int i=0, j=0;i<pushLen;){
+        sk.push(pushV[i++]);
+        while(j<popLen && sk.top()==popV[j]){
+            sk.pop();
             j++;
         }
     }
-    return stack.empty();
+    return sk.empty();
 }
-
 int main()
 {
     std::vector<int> push = {1, 2, 3, 4, 5};
-    std::vector<int> pop = {4, 5, 3, 1,2};
+    std::vector<int> pop = {4, 5, 3,1,2};
     if (IsPopOrder(push, pop))
     {
         std::cout << "pop series is pop order of push series!" << std::endl;

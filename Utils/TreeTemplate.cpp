@@ -54,7 +54,37 @@ void DestroyTree(TreeNode *pRoot)
     }
 }
 
-
+void levelOrder(TreeNode *root)
+{
+    std::vector<int> tmp;
+    TreeNode* pointer = root;
+    if(!root)
+        return;
+    std::queue<TreeNode *> que;
+    que.push(root);
+    que.push(nullptr);
+    while(!que.empty()){
+        while(que.front()){
+            pointer=que.front();
+            if(pointer->left)
+                que.push(pointer->left);
+            if(pointer->right)
+                que.push(pointer->right);
+            que.pop();
+            tmp.push_back(pointer->val);
+        }
+        que.pop();  //delete nullptr
+        if(!tmp.empty()){
+            for(auto a:tmp)
+                std::cout<<a<<"  ";
+        }
+        std::cout<<std::endl;            
+        tmp.clear();
+        if(que.empty())
+            break;
+        que.push(nullptr);
+    }
+}
 
 // int main()
 // {
@@ -68,8 +98,8 @@ void DestroyTree(TreeNode *pRoot)
 
     // ConnectTreeNodes(pN1, pN2, pN3);
     // ConnectTreeNodes(pN2, pN4, pN5);
-    // ConnectTreeNodes(pNc, pNf, pNg);
+    // ConnectTreeNodes(pN3, pN6, pN7);
 
-//     DestroyTree(pNa);
+//     DestroyTree(pN1);
 //     return 0;
 // }
