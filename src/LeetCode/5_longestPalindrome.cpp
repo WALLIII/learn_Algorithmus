@@ -23,34 +23,38 @@
 // }
 std::string longestPalindrome(std::string s)
 {
-    int length=s.size();
-    std::vector<std::vector<int>> dp(length, std::vector<int>(length,0));
-    if(length<=1)
+       if (s.size() <= 1)
         return s;
-    for(int i=0;i<length;++i){
-        dp[i][i]=1;
+    int len = s.size();
+    vector<vector<bool>> dp(len, vector<bool>(len));
+    for (int i = 0; i < len; ++i)
+    {
+        dp[i][i] = true;
     }
-    int maxLength=1;
-    int start=0;
-    for(int i=1;i<length;++i){
-        for(int j=0;j<i;++j){
-            if(s[i]==s[j]){
-                if(i-j<=2){
-                    dp[j][i]=1;
+    int maxLen=1, start=0;
+    for(int j=1;j<len;++j){
+        for(int i=0;i<j;++i){
+            // 先判断s[i...j]的头尾是否相等，如果不想等就直接为false了
+            if(s[i]!=s[j])
+                dp[i][j]=false;
+            // 在头尾相等的情况下判断子问题是否为true
+            else{
+                if(j-i<3){
+                    dp[i][j]=true;
                 }
+                // 如果s[i...j]的长度大于3就：
                 else{
-                    dp[j][i]=dp[j+1][i-1];
+                    dp[i][j]=dp[i+1][j-1];
                 }
             }
-            if(dp[j][i]){
-                if((i-j+1)>maxLength){
-                    start=j;
-                    maxLength=i-j+1;
-                }
+            // 如果s[i...j]是回文串的话判断当前的长度是否为当前的最佳值
+            if(dp[i][j] && (j-i+1)>maxLen){
+                maxLen=j-i+1;
+                start=i;
             }
         }
     }
-    return s.substr(start, maxLength);
+    return s.substr(start, maxLen);
 }
 int main()
 {

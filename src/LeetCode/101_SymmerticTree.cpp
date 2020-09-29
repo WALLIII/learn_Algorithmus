@@ -72,6 +72,7 @@ void DestroyTree(TreeNode *pRoot)
 //     }
 //     return dfs(root->left, root->right);
 // }
+
 // BFS
 bool isSymmetric(TreeNode *root)
 {

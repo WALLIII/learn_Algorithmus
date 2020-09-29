@@ -109,7 +109,7 @@ bool isPalindrome(ListNode *head)
 
     }
   
-    // 现在开始反转p2～pmid之间的链表
+    // 现在开始反转pmid到尾部的链表
     ListNode* curr=pmid, *pnext=pmid->next;
     
     while(pnext){
@@ -122,7 +122,7 @@ bool isPalindrome(ListNode *head)
     pmid->next=nullptr;
 
     ListNode* p1=head;
-
+    //现在curr是后半部分链表的头
     while(p1&&curr){
         if(p1->val==curr->val){
             p1=p1->next;

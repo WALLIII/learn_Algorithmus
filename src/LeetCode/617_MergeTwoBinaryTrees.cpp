@@ -60,12 +60,12 @@ TreeNode *mergeTrees(TreeNode *t1, TreeNode *t2)
         //判断左子树是否存在
         if (t_1->left && t_2->left)
             node_stack.push(std::make_pair(t_1->left, t_2->left));
-        if (!t_1->left)
+        else if (!t_1->left)
             t_1->left = t_2->left;
         //判断右子树是否存在
         if (t_1->right && t_2->right)
             node_stack.push(std::make_pair(t_1->right, t_2->right));
-        if (!t_1->right)
+        else if (!t_1->right)
             t_1->right = t_2->right;
     }
     return t1;

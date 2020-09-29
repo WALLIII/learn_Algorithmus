@@ -1,53 +1,48 @@
 #include <string>
 #include <unordered_map>
 #include <iostream>
-#include<stack>
+#include <stack>
+#include <unordered_map>
+
+using namespace std;
 
 bool isValid(std::string s)
 {
-    if(s.size()==0)
+    if (s.size() <=0)
         return true;
-    if(s.size()==1)
-        return false;
-    std::stack<int> sk;
-    bool isValid=false;
-    std::unordered_map<char, int> map{{'(',1},{'[',2},{'{',3}, \
-                                        {')',-1},{']',-2},{'}',-3}};
-    int i=0;
-    while(i<s.size()){
-        while(map[s[i]]>=1&&map[s[i]]<=3){
-            // std::cout<<"push: "<<s[i]<<std::endl;
-            sk.push(map[s[i]]);
-            ++i;
-        }
-        if(i>s.size()-1)
-            return false;
-        while(map[s[i]]>=-3&&map[s[i]]<=-1){
-            if(sk.empty())
-                return false;
-            int tmp=sk.top();
-            // std::cout<<"tmp:  "<<tmp<<std::endl;
-            if(tmp+map[s[i]]==0){
-                // std::cout<<"tmp+map==0----->"<<std::endl;
-                isValid=true;
-            }
-            else 
-                return false;
-            sk.pop();
-            ++i;
-        }
-    }
-    if(sk.empty())
-        return isValid;
-    else
+    unordered_map<char, char> hash = {{'(', ')'}, {'[', ']'}, {'{', '}'}};
+    stack<char> sk;
+    sk.push('?');
+    int i = 0;
+    while (i < s.size())
     {
-        return false;
+        if(hash.find(s[i])!=hash.end()){
+            sk.push(s[i]);
+        }
+        //如果不是左括号的话
+        else if(hash.find(s[i])==hash.end()){
+            if(s[i]==hash[sk.top()]){
+                sk.pop();
+            }
+            else{
+                return false;
+            }
+        }
+        ++i;
     }
-    
+    if(sk.size()>1)  return false;
+    else    return true;
 }
+
 
 int main()
 {
-    std::string s="([]";
-    std::cout<<isValid(s)<<std::endl;
-} Valid Parentheses
+    std::string s1 = "([]";
+    std::string s2 = "()[]{}";
+    std::string s3 = "((([])))";
+    std::string s4 = "(([))]";
+    std::cout << "s1:  " << s1 << "  " <<isValid(s1) << std::endl;
+    std::cout << "s2:  " << s2 << "  " <<isValid(s2) << std::endl;
+    std::cout << "s3:  " << s3 << "  " <<isValid(s3) << std::endl;
+    std::cout << "s4:  " << s4 << "  " <<isValid(s4) << std::endl;
+}

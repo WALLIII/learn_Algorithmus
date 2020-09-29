@@ -16,7 +16,9 @@ public:
     void SetHeap(std::vector<int> maxVec, std::vector<int> minVec){
         min = minVec;
         max = maxVec;
+        // 建立最大堆
         std::make_heap(max.begin(), max.end(), std::less<int>());
+        // 建立最小堆
         std::make_heap(min.begin(), min.end(), std::greater<int>());
     }
     void Insert(int num);
@@ -25,7 +27,7 @@ public:
 
 void DataStream::Insert(int num)
 {
-    // max.size()+min.size(): even number
+    // max.size()+min.size(): even number，往最小堆插入
     if (((max.size() + min.size()) & 1) == 0)
     {
         // max[0]: maximum of max heap
@@ -40,7 +42,7 @@ void DataStream::Insert(int num)
         min.push_back(num);
         std::push_heap(min.begin(), min.end(), std::greater<int>());
     }
-    // max.size()+min.size(): odd number
+    // max.size()+min.size(): odd number，往最大堆插入
     else
     {
         if (min.size() > 0 && num > min[0])

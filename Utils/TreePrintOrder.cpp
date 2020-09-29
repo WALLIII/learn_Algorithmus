@@ -54,9 +54,11 @@ void DestroyTree(TreeNode *pRoot)
     }
 }
 // Preorder traversal sequence recursively
-void preOrder(TreeNode *root){
-    if(root){
-        std::cout<<root->val<<"   ";
+void preOrder(TreeNode *root)
+{
+    if (root)
+    {
+        std::cout << root->val << "   ";
         preOrder(root->left);
         preOrder(root->right);
     }
@@ -64,91 +66,99 @@ void preOrder(TreeNode *root){
 // Preorder traversal sequence iteratively
 std::vector<int> preOrder1(TreeNode *root)
 {
-    std::vector<int> result;
-    if (root == NULL)
+    std::stack<TreeNode *> nodes;
+    std::vector<int> res;
+    TreeNode *curr = root;
+    while (curr || !nodes.empty())
     {
-        return result;
-    }
-    std::stack<TreeNode *> nstack;
-    nstack.push(root);
-    while (!nstack.empty())
-    {
-        TreeNode *temp = nstack.top();
-        result.push_back(temp->val);
-        nstack.pop();
-        if (temp->right)
+        while (curr)
         {
-            nstack.push(temp->right);
+            nodes.push(curr->right);
+            res.push_back(curr->val);
+            curr = curr->left;
         }
-        if (temp->left)
-        {
-            nstack.push(temp->left);
-        }
+        curr = nodes.top();
+        nodes.pop();
     }
-    return result;
+    return res;
 }
 
 // Inorder traversal sequence recursively
-void inOrder(TreeNode *root){
-    if(root){
+void inOrder(TreeNode *root)
+{
+    if (root)
+    {
         inOrder(root->left);
-        std::cout<<root->val<<"   ";
+        std::cout << root->val << "   ";
         inOrder(root->right);
     }
 }
 // Inorder traversal sequence iteratively
-std::vector<int> inOrder1(TreeNode *root){
-    std::stack<TreeNode *> nstack;
+std::vector<int> inOrder1(TreeNode *root)
+{
+    std::stack<TreeNode *> sk;
     std::vector<int> result;
-    if(!root)
+    if (!root)
         return result;
-    TreeNode *temp=root;
-    while(temp||!nstack.empty()){
-        if(temp){
-            nstack.push(temp);
-            temp=temp->left;
+    TreeNode *curr = root;
+    while (curr || !sk.empty())
+    {
+        if (curr)
+        {
+            sk.push(curr);
+            curr = curr->left;
         }
-        else{
-            temp=nstack.top();
-            result.push_back(temp->val);
-            nstack.pop();
-            temp=temp->right;
-        }
+
+        curr = sk.top();
+        result.push_back(curr->val);
+        sk.pop();
+        curr = curr->right;
     }
     return result;
 }
 
 // Post-order traversal sequence recursively
-void postOrder(TreeNode *root){
-    if(root){
+void postOrder(TreeNode *root)
+{
+    if (root)
+    {
         postOrder(root->left);
         postOrder(root->right);
-        std::cout<<root->val<<"   ";
+        std::cout << root->val << "   ";
     }
 }
 
 // Post-order traversal sequence iteratively
-std::vector<int> posOrder1(TreeNode *root){
-    std::vector<int> result;
-    if(root==NULL)
-        return result;
-    std::stack<TreeNode *> nstack1, nstack2;
-    nstack1.push(root);
-    while (!nstack1.empty()){
-        TreeNode *temp=nstack1.top();
-        nstack1.pop();
-        nstack2.push(temp);
-        if(temp->left)
-            nstack1.push(temp->left);
-        if(temp->right)
-           nstack1.push(temp->right);
-    }
-    while(!nstack2.empty())
+std::vector<int> postOrder(TreeNode *root)
+{
+    std::vector<int> v;
+    if (root == nullptr)
+        return v;
+    std::stack<TreeNode *> sk;
+    TreeNode *curr = root;
+    TreeNode *pre = nullptr;
+    while (curr || !sk.empty())
     {
-        std::cout<<nstack2.top()->val;
-        nstack2.pop();
+        while (curr)
+        {
+            sk.push(curr);
+            curr = curr->left;
+        }
+        curr = sk.top();
+        // 如果没有右儿子或者右儿子已经被访问过了，这个时候可以放心的把当前节点打印出来
+        if (curr->right == nullptr || curr->right == pre)
+        {
+            v.push_back(curr->val);
+            sk.pop();
+            // 然后把带那当前节点标记为pre，即已经访问过了
+            pre = curr;
+            curr = nullptr;
+        }
+        // 不然就访问它的右儿子
+        else
+            curr = curr->right;
     }
-    return result;
+    return v;
 }
 
 int main()

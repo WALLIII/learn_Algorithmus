@@ -3,12 +3,7 @@
 void DFSFindPath(TreeNode *root, int rest, std::vector<std::vector<int>> &path, std::vector<int> &res)
 {
     rest = rest - (root->val);
-    res.push_back(root->val);
-    for (auto a : res)
-    {
-        std::cout << a << "  ";
-    }
-    std::cout << std::endl;
+    res.push_back(root->val);    
     if (root->left == nullptr && root->right == nullptr)
     {
         if (rest == 0)

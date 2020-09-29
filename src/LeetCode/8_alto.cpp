@@ -37,10 +37,8 @@ int myAtoi(std::string str)
         {
             int u=int(str[i]) - '0';
             if (res > (INT_MAX-u)/10){
-                if(isMinus)
-                    return INT_MIN;
-                else
-                    return INT_MAX;
+                return isMinus?INT_MIN:INT_MAX;
+          
             }
                 
             res *= 10;

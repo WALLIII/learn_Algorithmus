@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-
+// 冒泡排序
 void BubbleSort(std::vector<int> &arr)
 {
     int len = arr.size();
@@ -15,41 +15,40 @@ void BubbleSort(std::vector<int> &arr)
         }
     }
 }
-
-int Partition(std::vector<int> &arr, int first, int last);
-void quickSortPart(std::vector<int> &arr, int first, int last);
-void quickSort(std::vector<int> &arr)
-{
-    if (arr.size() < 1)
-        return;
-    quickSortPart(arr, 0, arr.size() - 1);
-}
-void quickSortPart(std::vector<int> &arr, int first, int last)
-{
-    if (first >= last)
-    {
-        return;
+// 快速排序
+int Partition(std::vector<int> &arr, int l, int r){
+    int tmp=arr[l];
+    while(l<r){
+        while(l<r && arr[r]>=tmp)
+            --r;
+        std::swap(arr[l], arr[r]);
+        while(l<r && arr[l]<tmp)
+            ++l;
+        std::swap(arr[l], arr[r]);
     }
-    int midIndex = Partition(arr, first, last);
-    quickSortPart(arr, first, midIndex - 1);
-    quickSortPart(arr, midIndex + 1, last);
+    return l;
 }
 
-int Partition(std::vector<int> &arr, int first, int last)
-{
-    int tmp = arr[last];
-    while (first < last)
-    {
-        while (first < last && arr[first] <= tmp)
-            first++;
-        std::swap(arr[first], arr[last]);
-        while (first < last && arr[last] >= tmp)
-            last--;
-        std::swap(arr[first], arr[last]);
-    }
-    return last;
+int randomPartition(std::vector<int> &arr, int l, int r){
+    int ran=rand()%(r-l+1)+l;
+    std::swap(arr[ran], arr[l]);
+    return Partition(arr, l, r);
 }
 
+void quickSortPart(std::vector<int> &arr, int l, int r){
+    if(l>=r)
+        return;
+    int index=randomPartition(arr, l, r);
+    quickSortPart(arr, l, index-1);
+    quickSortPart(arr, index+1, r);
+}
+
+void quickSort(std::vector<int> &arr){
+    if(arr.size()<=0)
+        return;
+    return quickSortPart(arr, 0, arr.size()-1);
+}
+// 插入排序
 void inlineSort(std::vector<int> &array)
 {
     if (array.size() == 0)
@@ -69,6 +68,51 @@ void inlineSort(std::vector<int> &array)
         }
     }
 }
+//  并归排序
+void mergeSortCore(std::vector<int> &array, int *&copy, int start, int end)
+{
+    if (start == end)
+    {
+        return;
+    }
+    int mid = (start + end) / 2;
+    mergeSortCore(array, copy, start, mid);
+    mergeSortCore(array, copy, mid + 1, end);
+    int p1 = mid, p2 = end, index = end;
+    while (p1 >= start && p2 >= mid + 1)
+    {
+        if (array[p1] > array[p2])
+        {
+            copy[index--] = array[p1--];
+        }
+        else
+        {
+            copy[index--] = array[p2--];
+        }
+    }
+    for (; p1 >= start; --p1)
+    {
+        copy[index--] = array[p1];
+    }
+    for (; p2 >= mid + 1; --p2)
+    {
+        copy[index--] = array[p2];
+    }
+    for (int i = start; i <= end; ++i)
+    {
+        array[i] = copy[i];
+    }
+}
+void mergeSort(std::vector<int> &array)
+{
+    if (array.size() <= 1)
+        return;
+    int *copy = new int[array.size()];
+    for (int i = 0; i < array.size(); ++i)
+        copy[i] = 0;
+    mergeSortCore(array, copy, 0, array.size() - 1);
+}
+
 
 int main()
 {

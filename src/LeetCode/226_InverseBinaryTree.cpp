@@ -36,6 +36,28 @@
 //     return root;
 // }
 
+// DFS
+// TreeNode *invertTree(TreeNode *root)
+// {
+//     if (!root)
+//         return nullptr;
+//     std::queue<TreeNode *> que;
+//     que.push(root);
+//     while (!que.empty())
+//     {
+//         TreeNode *curr = que.front();
+//         que.pop();
+//         TreeNode *tmp = curr->left;
+//         curr->left = curr->right;
+//         curr->right = tmp;
+//         if (curr->left != nullptr)
+//             que.push(curr->left);
+//         if (curr->right != nullptr)
+//             que.push(curr->right);
+//     }
+//     return root;
+// }
+
 void swapChild(TreeNode *current)
 {
     //先把根节点的左右翻转

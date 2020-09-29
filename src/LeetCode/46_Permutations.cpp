@@ -2,7 +2,6 @@
 #include <vector>
 
 void backtrack(std::vector<int> &nums, int start,
-               std::vector<int> &track,
                std::vector<std::vector<int>> &ans)
 {
     if(start>=nums.size()){
@@ -12,7 +11,7 @@ void backtrack(std::vector<int> &nums, int start,
     for (int i = start; i < nums.size(); ++i)
     {
         std::swap(nums[start],nums[i]);
-        backtrack(nums, start+1, track, ans);
+        backtrack(nums, start+1, ans);
         std::swap(nums[i],nums[start]);
     }
 }
@@ -20,8 +19,7 @@ void backtrack(std::vector<int> &nums, int start,
 std::vector<std::vector<int>> permute(std::vector<int> &nums)
 {
     std::vector<std::vector<int>> ans;
-    std::vector<int> track;
-    backtrack(nums, 0, track, ans);
+    backtrack(nums, 0, ans);
     return ans;
 }
 int main()

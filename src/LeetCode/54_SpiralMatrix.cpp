@@ -3,10 +3,12 @@
 
 std::vector<int> spiralOrder(std::vector<std::vector<int>> &matrix)
 {
+    std::vector<int> ans;
+    if(matrix.empty())
+        return ans;
     int row = matrix.size() - 1;
     int col = matrix[0].size() - 1;
     int top = 0, bottom = row, left = 0, right = col;
-    std::vector<int> ans;
     while (top <= bottom && left <= right)
     {
         // top : left to right

@@ -1,34 +1,38 @@
-#include "../Utils/TreeTemplate.cpp"
-
-int maxPathSum(TreeNode *root, int &maxVal)
-{
-    if (!root)
-        return 0;
-    int left = maxPathSum(root->left, maxVal);
-    int right = maxPathSum(root->right, maxVal);
-    int candidateMax = root->val + std::max(0, left) + std::max(0, right);
-    int SubTreeMax = root->val + std::max(0, std::max(left, right));
-    maxVal = maxVal > candidateMax ? maxVal : candidateMax;
-    return SubTreeMax;
-}
-
-int maxPathSum(TreeNode *root)
-{
-    int maxVal = INT_MIN;
-    int res = maxPathSum(root, maxVal);
-    return maxVal;
-}
+#include<stdio.h>
+#include<unistd.h>
 int main()
 {
-    TreeNode *pN1 = CreateBinaryTreeNode(-10);
-    TreeNode *pN2 = CreateBinaryTreeNode(9);
-    TreeNode *pN3 = CreateBinaryTreeNode(20);
-    TreeNode *pN4 = CreateBinaryTreeNode(15);
-    TreeNode *pN5 = CreateBinaryTreeNode(7);
-
-    ConnectTreeNodes(pN1, pN2, pN3);
-    ConnectTreeNodes(pN3, pN4, pN5);
-    std::cout << maxPathSum(pN1) << std::endl;
-    DestroyTree(pN1);
+    pid_t pid;
+    int count = 0;
+    pid = fork();   //fork一个进程，返回子进程的进程号
+    if(pid == 0)
+    {               //pid为0,
+        printf("this is child process, pid is %d\n",getpid());//getpid返回的是当前进程的PID
+        count+=2;
+        printf("count = %d\n",count);
+    }
+    else if(pid > 0)
+    {
+        printf("this is father process, pid is %d\n",getpid());
+        count++;
+        printf("count = %d\n",count);
+    }
+    else
+    {
+        fprintf(stderr,"ERROR:fork() failed!\n");
+    }
     return 0;
 }
+
+// int main()
+// {
+//     pid_t pid[3];
+//     int count = 0;
+//     pid[0] = fork();
+//     pid[1] = fork();
+//     pid[2] = fork();
+
+//     printf("this is process\n");
+
+//     return 0;
+// }

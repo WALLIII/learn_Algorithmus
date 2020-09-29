@@ -6,9 +6,11 @@ int maxPathSum(TreeNode *root, int &maxVal)
         return 0;
     int left = maxPathSum(root->left, maxVal);
     int right = maxPathSum(root->right, maxVal);
-    int candidateMax = root->val + std::max(0, left) + std::max(0, right);
-    int subTreeMax = root->val + std::max(0, std::max(left, right));
-    maxVal = maxVal > candidateMax ? maxVal : candidateMax;
+    //candidate是maxVal的候选值，是取两个子树的最优路径和，因为路径可以不是从根节点到也节点
+    int candidate = root->val + max(0, left) + max(0, right);
+    maxVal = maxVal > candidate ? maxVal : candidate;
+    //当前root作为根节点的最优的一条路径，在左右儿子的最优解中只能选其一跟自己相加，给更大的子问题提供答案
+    int subTreeMax = root->val + max(0, max(left, right));
     return subTreeMax;
 }
 

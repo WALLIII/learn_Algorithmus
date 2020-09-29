@@ -2,12 +2,16 @@
 
 TreeNode *lowestCommonAncestor(TreeNode *root, TreeNode *p, TreeNode *q)
 {
+    //如果当前节点为pq中的任意一个，就直接返回，答案就是那个相等的节点。
     if (!root || root == p || root == q)
         return root;
+    //分别探索左右儿子
     TreeNode *l = lowestCommonAncestor(root->left, p, q);
     TreeNode *r = lowestCommonAncestor(root->right, p, q);
+    //如果在左右儿子中都找到了的话，l和r都不会为空，那当前root就是要找的答案
     if (l && r)
         return root;
+    //左右儿子至少有一个为空，返回不空的那个。如果都为空，返回任意一个，都是空
     return l ? l : r;
 }
 int main()

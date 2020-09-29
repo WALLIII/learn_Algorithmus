@@ -4,7 +4,7 @@
 std::vector<std::vector<int>> threeSum(std::vector<int> &nums)
 {
     std::vector<std::vector<int>> ans;
-    if (nums.size() <= 0)
+    if (nums.size() <3)
         return ans;
     std::sort(nums.begin(), nums.end());
 
@@ -22,11 +22,7 @@ std::vector<std::vector<int>> threeSum(std::vector<int> &nums)
             if (currSum == 0)
             {
                 std::vector<int> tmp{nums[i], nums[p1], nums[p2]};
-                // for (auto a : tmp)
-                // {
-                //     std::cout << a << "    ";
-                // }
-                // std::cout << std::endl;
+           
                 ans.push_back(tmp);
                 while (p1 < p2 && nums[p1] == nums[p1 + 1])
                 {
