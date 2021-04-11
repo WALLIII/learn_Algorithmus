@@ -67,12 +67,12 @@ public:
  * bool param_6 = obj->isFull();
  */
 
-int main(){
-    MyCircularQueue* obj = new MyCircularQueue(2);
-    bool param_1 = obj->enQueue(1);
-    bool param_2 = obj->deQueue();
-    int param_3 = obj->Front();
-    int param_4 = obj->Rear();
-    bool param_5 = obj->isEmpty();
-    bool param_6 = obj->isFull();
-}
+// int main(){
+//     MyCircularQueue* obj = new MyCircularQueue(2);
+//     bool param_1 = obj->enQueue(1);
+//     bool param_2 = obj->deQueue();
+//     int param_3 = obj->Front();
+//     int param_4 = obj->Rear();
+//     bool param_5 = obj->isEmpty();
+//     bool param_6 = obj->isFull();
+// }
