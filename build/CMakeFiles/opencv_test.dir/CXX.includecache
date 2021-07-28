@@ -6,9 +6,9 @@
 
 #IncludeRegexTransform: 
 
-/Users/xyx/Documents/workspace/clearning/yx_workspace/src/opencv_test.cpp
-thread
+/Users/xyx/Documents/workspace/clearning/learn_Algorithm/src/opencv_test.cpp
+iostream
 -
-mutex
+vector
 -
 

@@ -67,10 +67,10 @@ RM = /usr/local/Cellar/cmake/3.18.4/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/xyx/Documents/workspace/clearning/yx_workspace
+CMAKE_SOURCE_DIR = /Users/xyx/Documents/workspace/clearning/learn_Algorithm
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/xyx/Documents/workspace/clearning/yx_workspace/build
+CMAKE_BINARY_DIR = /Users/xyx/Documents/workspace/clearning/learn_Algorithm/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -89,7 +89,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/usr/local/Cellar/cmake/3.16.2/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/usr/local/Cellar/cmake/3.18.4/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -99,9 +99,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/xyx/Documents/workspace/clearning/yx_workspace/build/CMakeFiles /Users/xyx/Documents/workspace/clearning/yx_workspace/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/xyx/Documents/workspace/clearning/learn_Algorithm/build/CMakeFiles /Users/xyx/Documents/workspace/clearning/learn_Algorithm/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/xyx/Documents/workspace/clearning/yx_workspace/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/xyx/Documents/workspace/clearning/learn_Algorithm/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -196,6 +196,33 @@ src/Sales_data.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/opencv_test.dir/build.make CMakeFiles/opencv_test.dir/src/Sales_data.cpp.s
 .PHONY : src/Sales_data.cpp.s
 
+src/multi-thread.o: src/multi-thread.cpp.o
+
+.PHONY : src/multi-thread.o
+
+# target to build an object file
+src/multi-thread.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/opencv_test.dir/build.make CMakeFiles/opencv_test.dir/src/multi-thread.cpp.o
+.PHONY : src/multi-thread.cpp.o
+
+src/multi-thread.i: src/multi-thread.cpp.i
+
+.PHONY : src/multi-thread.i
+
+# target to preprocess a source file
+src/multi-thread.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/opencv_test.dir/build.make CMakeFiles/opencv_test.dir/src/multi-thread.cpp.i
+.PHONY : src/multi-thread.cpp.i
+
+src/multi-thread.s: src/multi-thread.cpp.s
+
+.PHONY : src/multi-thread.s
+
+# target to generate assembly for a file
+src/multi-thread.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/opencv_test.dir/build.make CMakeFiles/opencv_test.dir/src/multi-thread.cpp.s
+.PHONY : src/multi-thread.cpp.s
+
 src/opencv_test.o: src/opencv_test.cpp.o
 
 .PHONY : src/opencv_test.o
@@ -265,6 +292,9 @@ help:
 	@echo "... src/Sales_data.o"
 	@echo "... src/Sales_data.i"
 	@echo "... src/Sales_data.s"
+	@echo "... src/multi-thread.o"
+	@echo "... src/multi-thread.i"
+	@echo "... src/multi-thread.s"
 	@echo "... src/opencv_test.o"
 	@echo "... src/opencv_test.i"
 	@echo "... src/opencv_test.s"

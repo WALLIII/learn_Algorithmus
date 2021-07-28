@@ -1,2 +1,0 @@
-/usr/bin/ar qc libLibs.a  CMakeFiles/Libs.dir/MyQueue.cpp.o CMakeFiles/Libs.dir/MyStack.cpp.o
-/usr/bin/ranlib libLibs.a

@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 
 int mySqrt2(int x)
 {
